@@ -7,9 +7,80 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 //coba coba2
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Workouts {
+  workout_id       Int                @id @default(autoincrement())
+  name_workout     String
+  detail_workout   String
+  workout_type     String //Warm up, cooldown, core
+  photo_workout    String //nanti ke link ke photonya
+  workout_duration Int
+  Workouts_courses Workouts_courses[]
+}
+
+model Courses {
+  course_id        Int                @id @default(autoincrement())
+  detail_course    String
+  course_duration  Int //in days, Enrollment yang ada di DB kek e nda usah sek itu buat nampung apa sih wkwk
+  Workouts_courses Workouts_courses[]
+  Courses_Users    Courses_Users[]
+}
+
+model Workouts_courses {
+  workout_course_id Int      @id @default(autoincrement())
+  detail_course     String
+  workout           Workouts @relation(fields: [workout_id], references: [workout_id])
+  workout_id        Int
+  course            Courses  @relation(fields: [course_id], references: [course_id])
+  course_id         Int
+}
+
+model Users {
+  user_id        Int             @id @default(autoincrement())
+  username       String
+  photo_workout  String //nanti ke link ke photonya
+  course_counter Int //how many workouts yg sudah dilakukan
+  performance    Int //total waktu in mins yg didapatkan
+  Courses_Users  Courses_Users[]
+  Posts          Posts[]
+  Comments       Comments[]
+}
+
+model Courses_Users {
+  course_user_id Int     @id @default(autoincrement())
+  user           Users   @relation(fields: [user_id], references: [user_id])
+  user_id        Int
+  course         Courses @relation(fields: [course_id], references: [course_id])
+  course_id      Int
+}
+
+model Posts {
+  post_id          Int        @id @default(autoincrement())
+  post_name        String //get course title
+  post_description String
+  post_photo       String //nanti ke link ke photonya
+  post_date        DateTime   @default(now())
+  post_likes       Int //total likes
+  post_isLike      Boolean
+  user             Users      @relation(fields: [user_id], references: [user_id])
+  user_id          Int // user id disini
+  Comments         Comments[]
+}
+
+model Comments {
+  //hrs nya ya comment ini ke connect sama user gasih, soalnya user kan yg memiliki comment (1 to many, 1 user have many comments)
+  comment_id   Int      @id @default(autoincrement())
+  comment      String //get course title
+  comment_date DateTime @default(now())
+  user         Users    @relation(fields: [user_id], references: [user_id])
+  user_id      Int
+  post         Posts    @relation(fields: [post_id], references: [post_id])
+  post_id Int
 }
