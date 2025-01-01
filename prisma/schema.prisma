@@ -16,45 +16,34 @@ datasource db {
 }
 
 model Workouts {
-  workout_id       Int                @id @default(autoincrement())
-  name_workout     String             @db.VarChar(250)
-  detail_workout   String             @db.Text
-  workout_type     String             @db.VarChar(50) //Warm up, cooldown, core
-  photo_workout    String             @db.Text //nanti ke link ke photonya
-  workout_duration Int                @db.Integer //in minutes
+  workout_id       Int    @id @default(autoincrement())
+  name_workout     String @db.VarChar(250)
+  detail_workout   String @db.Text
+  workout_type     String @db.VarChar(50) //Warm up, cooldown, core
+  photo_workout    String @db.Text //nanti ke link ke photonya
+  workout_duration Int    @db.Integer //in minutes
 
   Workouts_courses Workouts_courses[]
-}
-
-model Courses {
-  course_id        Int                @id @default(autoincrement())
-  detail_course    String             @db.Text
-  photo_course     String             @db.Text //nanti ke link ke photonya
-  course_duration  Int                @db.Integer//in days, Enrollment yang ada di DB kek e nda usah sek itu buat nampung apa sih wkwk
-  
-  Workouts_courses Workouts_courses[]
-  Courses_Users    Courses_Users[]
 }
 
 model Workouts_courses {
-  workout_course_id Int               @id @default(autoincrement())
+  workout_course_id Int @id @default(autoincrement())
 
-  workout_id        Int
-  workout           Workouts          @relation(fields: [workout_id], references: [workout_id])
+  workout_id Int
+  workout    Workouts @relation(fields: [workout_id], references: [workout_id])
 
-  course_id         Int
-  course            Courses           @relation(fields: [course_id], references: [course_id])
-  
+  course_id Int
+  course    Courses @relation(fields: [course_id], references: [course_id])
 }
 
 model Users {
-  user_id         Int             @id @default(autoincrement())
-  username        String          @unique @db.VarChar(250)
-  email           String          @unique @db.VarChar(250)
-  password        String          @db.VarChar(250)
-  photo_workout   String          @db.Text //nanti ke link ke photonya
-  course_counter  Int             @db.Integer //how many workouts yg sudah dilakukan atau course yg sdh done?
-  performance     Int             @db.Integer //total waktu in mins yg didapatkan
+  user_id        Int    @id @default(autoincrement())
+  username       String @unique @db.VarChar(250)
+  email          String @unique @db.VarChar(250)
+  password       String @db.VarChar(250)
+  photo_workout  String @db.Text //nanti ke link ke photonya
+  course_counter Int    @db.Integer //how many workouts yg sudah dilakukan atau course yg sdh done?
+  performance    Int    @db.Integer //total waktu in mins yg didapatkan
 
   Courses_Users   Courses_Users[]
   Posts           Posts[]
@@ -63,62 +52,69 @@ model Users {
 }
 
 model Courses_Users {
-  course_user_id Int     @id @default(autoincrement())
+  course_user_id Int @id @default(autoincrement())
 
-  user_id        Int
-  user           Users   @relation(fields: [user_id], references: [user_id])
+  user_id Int
+  user    Users @relation(fields: [user_id], references: [user_id])
 
-  course_id      Int
-  course         Courses @relation(fields: [course_id], references: [course_id])
-  
+  course_id Int
+  course    Courses @relation(fields: [course_id], references: [course_id])
 }
 
 model Posts {
-  post_id          Int        @id @default(autoincrement())
-  post_name        String     @db.VarChar(200) //get course title
-  post_description String     @db.Text
-  post_photo       String     @db.Text //nanti ke link ke photonya
-  post_date        DateTime   @default(now())
-  post_likes       Int        @db.Integer//total likes
-  post_isLike      Boolean    @db.Boolean //true or false
+  post_id          Int      @id @default(autoincrement())
+  post_name        String   @db.VarChar(200) //get course title
+  post_description String   @db.Text
+  post_photo       String   @db.Text //nanti ke link ke photonya
+  post_date        DateTime @default(now())
+  post_likes       Int      @db.Integer //total likes
+  post_isLike      Boolean  @db.Boolean //true or false
 
-  user_id          Int // user id disini
-  user             Users      @relation(fields: [user_id], references: [user_id])
-  
-  Comments         Comments[]
+  user_id Int // user id disini
+  user    Users @relation(fields: [user_id], references: [user_id])
+
+  Comments Comments[]
 }
 
 model Comments {
   //hrs nya ya comment ini ke connect sama user gasih, soalnya user kan yg memiliki comment (1 to many, 1 user have many comments)
   //yes connect user sm post
   comment_id   Int      @id @default(autoincrement())
-  comment      String   @db.Text  //get course title
+  comment      String   @db.Text //get course title
   comment_date DateTime @default(now())
 
-  user_id      Int
-  user         Users    @relation(fields: [user_id], references: [user_id])
+  user_id Int
+  user    Users @relation(fields: [user_id], references: [user_id])
 
-  post_id      Int
-  post         Posts    @relation(fields: [post_id], references: [post_id])
-  
+  post_id Int
+  post    Posts @relation(fields: [post_id], references: [post_id])
 }
 
-model Community {
-  community_id    Int              @id @default(autoincrement())
-  name            String           @db.VarChar(250)
-  description     String           @db.Text
-  photo           String           @db.Text // Photo link for the community
+model Communities {
+  community_id Int    @id @default(autoincrement())
+  name         String @db.VarChar(250)
+  description  String @db.Text
+  photo        String @db.Text // Photo link for the community
 
+  Course          Courses?          @relation("CommunityToCourse")
   Users_community Users_community[]
 }
 
 model Users_community {
-  user_community_id Int       @id @default(autoincrement())
- 
+  user_community_id Int         @id @default(autoincrement())
   user_id           Int
-  user              Users     @relation(fields: [user_id], references: [user_id])
-
+  user              Users       @relation(fields: [user_id], references: [user_id])
   community_id      Int
-  community         Community @relation(fields: [community_id], references: [community_id])
+  community         Communities @relation(fields: [community_id], references: [community_id])
 }
 
+model Courses {
+  course_id        Int                @id @default(autoincrement())
+  detail_course    String             @db.Text
+  photo_course     String             @db.Text // Link to the course photo
+  course_duration  Int                @db.Integer // Duration in days
+  community_id     Int                @unique
+  Community        Communities        @relation("CommunityToCourse", fields: [community_id], references: [community_id], onDelete: Cascade)
+  Workouts_courses Workouts_courses[]
+  Courses_Users    Courses_Users[]
+}
