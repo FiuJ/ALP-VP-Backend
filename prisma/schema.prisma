@@ -70,6 +70,7 @@ model Posts {
   post_date        DateTime @default(now())
   post_likes       Int      @db.Integer //total likes
   post_isLike      Boolean  @db.Boolean //true or false
+  isPublic         Boolean  @db.Boolean //true or false
 
   user_id Int // user id disini
   user    Users @relation(fields: [user_id], references: [user_id])

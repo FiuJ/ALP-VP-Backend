@@ -4,6 +4,8 @@ import { WorkoutController } from "../controllers/workout-controller";
 import { CourseController } from "../controllers/course-controller";
 import { UserController } from "../controllers/user-controller";
 import { CommunityController } from "../controllers/community-controller";
+import { CommentController } from "../controllers/comment-controller";
+import { PostController } from "../controllers/post-controller";
 
 
 export const protectedRouter = express.Router();
@@ -31,3 +33,14 @@ protectedRouter.post("/api/community", CommunityController.createCommunity);
 protectedRouter.get("/api/community", CommunityController.getAllCommunities);
 protectedRouter.get("/api/community/:communityId", CommunityController.getCommunity);
 protectedRouter.put("/api/community/:communityId", CommunityController.updateCommunity);
+
+// Comment routes
+protectedRouter.post("/api/comments", CommentController.createComment);
+protectedRouter.get("/api/comments", CommentController.getAllComments);
+
+// Post routes
+protectedRouter.post("/api/post", PostController.createPost);
+protectedRouter.get("/api/post", PostController.getAllPosts);
+protectedRouter.get("/api/post/:postId", PostController.getPost);
+protectedRouter.put("/api/post/:postId", PostController.updatePost);
+protectedRouter.delete("/api/post/:postId", PostController.deletePost);
