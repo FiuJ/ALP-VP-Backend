@@ -52,7 +52,8 @@ export class WorkoutController {
     static async updateWorkout(req: UserRequest, res: Response, next: NextFunction) {
         try {
                 const request: WorkoutCreateRequest = req.body as WorkoutCreateRequest;
-                const response = await WorkoutService.updateWorkout(req.user!, Number(req.params.course_id),request);
+                const response = await WorkoutService.updateWorkout(
+                    req.user!, Number(req.params.course_id),request);
                 res.status(201).json({
                     data: response,
                 })
