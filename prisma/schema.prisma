@@ -41,6 +41,7 @@ model Users {
   username       String @unique @db.VarChar(250)
   email          String @unique @db.VarChar(250)
   password       String @db.VarChar(250)
+  token String?  @db.VarChar(100)
   photo_workout  String @db.Text //nanti ke link ke photonya
   course_counter Int    @db.Integer //how many workouts yg sudah dilakukan atau course yg sdh done?
   performance    Int    @db.Integer //total waktu in mins yg didapatkan

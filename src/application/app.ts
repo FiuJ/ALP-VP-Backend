@@ -1,11 +1,13 @@
-import  express  from "express";
+import express from "express"
+import { publicRouter } from "../routes/public-router"
+import { errorMiddleware } from "../middleware/error-middleware"
+import { protectedRouter } from "../routes/protected-router"
 
-import { errorMiddleware } from "../middleware/error-middleware";
+const app = express()
+app.use(express.json())
 
-const app = express();
+app.use(publicRouter)
+app.use(errorMiddleware)
+app.use(protectedRouter)
 
-app.use(express.json());
-//blm lengkap
-app.use(errorMiddleware);
-
-export default app;
+export default app
