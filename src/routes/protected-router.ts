@@ -44,3 +44,5 @@ protectedRouter.get("/api/post", PostController.getAllPosts);
 protectedRouter.get("/api/post/:postId", PostController.getPost);
 protectedRouter.put("/api/post/:postId", PostController.updatePost);
 protectedRouter.delete("/api/post/:postId", PostController.deletePost);
+protectedRouter.get("/api/post/user/:userId", PostController.getAllPostsByUser);
+protectedRouter.get("/api/post/public", PostController.getAllPostIsPublic);

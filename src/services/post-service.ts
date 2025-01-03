@@ -109,4 +109,41 @@ export class PostService {
 
         return "Post deleted successfully";
     }
+
+
+    static async getAllPostsByUser(user: Users, userId: number): Promise<PostResponse[]> {
+
+        if (user.user_id !== userId) {
+            throw new ResponseError(403, "Forbidden");
+        }
+        
+        const posts = await prismaClient.posts.findMany({
+            where: {
+                user_id: userId,
+            },
+        });
+
+        if (posts.length === 0) {
+            throw new ResponseError(400, "No posts found for user");
+        }
+
+        return PostResponseList(posts);
+    }
+
+    static async getAllPostIsPublic(user: Users): Promise<PostResponse[]> {
+        const posts = await prismaClient.posts.findMany({
+            where: {
+                isPublic: true,
+            },
+        });
+
+        if (posts.length === 0) {
+            throw new ResponseError(400, "No public posts found");
+        }
+
+        return PostResponseList(posts);
+    }
+
+
+
 }
