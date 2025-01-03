@@ -1,3 +1,4 @@
+
 import { Posts } from "@prisma/client";
 
 export interface PostCreateRequest {

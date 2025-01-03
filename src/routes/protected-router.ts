@@ -6,6 +6,8 @@ import { UserController } from "../controllers/user-controller";
 import { CommunityController } from "../controllers/community-controller";
 import { CommentController } from "../controllers/comment-controller";
 import { PostController } from "../controllers/post-controller";
+import { WorkoutCoursesController } from "../controllers/workout_courses-controller";
+import { CoursesUsersController } from "../controllers/course_user-controller";
 
 
 export const protectedRouter = express.Router();
@@ -15,6 +17,23 @@ protectedRouter.use(authMiddleware);
 
 
 protectedRouter.delete("/api/logout", UserController.logout)
+
+// Course-User routes
+protectedRouter.post("/api/courses-users", CoursesUsersController.createCoursesUser); // Create a new course-user relation
+protectedRouter.get("/api/courses-users", CoursesUsersController.getAllCoursesUsers); // Get all course-user relations
+protectedRouter.get("/api/courses-users/:courseUserId", CoursesUsersController.getCoursesUser); // Get a specific course-user by ID
+protectedRouter.get("/api/courses-users/user/:userId", CoursesUsersController.getAllCoursesUsersByUserId); // Get all course-user relations for a specific user
+protectedRouter.put("/api/courses-users/:courseUserId", CoursesUsersController.updateCoursesUser); // Update a course-user relation
+protectedRouter.delete("/api/courses-users/:courseUserId", CoursesUsersController.deleteCoursesUser); // Delete a course-user relation
+
+
+// Workout-Courses routes
+protectedRouter.post("/api/workout-courses", WorkoutCoursesController.createWorkoutCourse); // Create a new workout-course relation
+protectedRouter.get("/api/workout-courses", WorkoutCoursesController.getAllWorkoutCourses); // Get all workout-course relations
+protectedRouter.get("/api/workout-courses/:workoutCourseId", WorkoutCoursesController.getWorkoutCourse); // Get a specific workout-course by ID
+protectedRouter.get("/api/workout-courses/course/:courseId", WorkoutCoursesController.getAllWorkoutCourseByCourseId); // Get workout-course relations by course ID
+protectedRouter.put("/api/workout-courses/:workoutCourseId", WorkoutCoursesController.updateWorkoutCourse); // Update a workout-course relation
+protectedRouter.delete("/api/workout-courses/:workoutCourseId", WorkoutCoursesController.deleteWorkoutCourse); // Delete a workout-course relation
 
 // Workout routes
 protectedRouter.post("/api/workouts", WorkoutController.createWorkout);
