@@ -8,6 +8,7 @@ import { CommentController } from "../controllers/comment-controller";
 import { PostController } from "../controllers/post-controller";
 import { WorkoutCoursesController } from "../controllers/workout_courses-controller";
 import { CoursesUsersController } from "../controllers/course_user-controller";
+import { UserCommunityController } from "../controllers/user-community-controller";
 
 
 export const protectedRouter = express.Router();
@@ -52,10 +53,12 @@ protectedRouter.post("/api/community", CommunityController.createCommunity);
 protectedRouter.get("/api/community", CommunityController.getAllCommunities);
 protectedRouter.get("/api/community/:communityId", CommunityController.getCommunity);
 protectedRouter.put("/api/community/:communityId", CommunityController.updateCommunity);
+protectedRouter.get("/api/community/user/:userId", CommunityController.getAllCommunitiesByUserId);
 
 // Comment routes
 protectedRouter.post("/api/comments", CommentController.createComment);
 protectedRouter.get("/api/comments", CommentController.getAllComments);
+protectedRouter.get("/api/comments/post/:postId", CommentController.getAllCommentsByPostId);
 
 // Post routes
 protectedRouter.post("/api/post", PostController.createPost);
@@ -65,3 +68,12 @@ protectedRouter.put("/api/post/:postId", PostController.updatePost);
 protectedRouter.delete("/api/post/:postId", PostController.deletePost);
 protectedRouter.get("/api/post/user/:userId", PostController.getAllPostsByUser);
 protectedRouter.get("/api/post/public", PostController.getAllPostIsPublic);
+
+// User-Community routes
+protectedRouter.post("/api/user-community", UserCommunityController.createUserCommunity);
+protectedRouter.get("/api/user-community", UserCommunityController.getAllUserCommunities);
+protectedRouter.get("/api/user-community/:userCommunityId", UserCommunityController.getUserCommunityById);
+protectedRouter.delete("/api/user-community/:userCommunityId", UserCommunityController.deleteUserCommunityById);
+
+
+

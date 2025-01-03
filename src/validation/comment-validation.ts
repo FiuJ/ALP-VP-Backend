@@ -8,5 +8,4 @@ export class CommentValidation {
         post_id: z.number().positive(),
     });
 
-    //pake update?
 }

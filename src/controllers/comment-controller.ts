@@ -31,4 +31,20 @@ export class CommentController {
         }
     }
 
+    // Get all comments by post ID
+    static async getAllCommentsByPostId(
+        req: UserRequest, 
+        res: Response, 
+        next: NextFunction){
+        try {
+            const post_id = parseInt(req.params.post_id);
+            const response = await CommentService.getAllCommentsByPostId(req.user!, post_id);
+            res.status(200).json({ 
+                data: response 
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }

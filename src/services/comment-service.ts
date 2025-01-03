@@ -36,4 +36,13 @@ export class CommentService {
         return CommentResponseList(comments);
     }
 
+    static async getAllCommentsByPostId(user: Users, post_id: number): Promise<CommentResponse[]> {
+        const comments = await prismaClient.comments.findMany({
+            where: {
+                post_id: post_id
+            }
+        });
+        return CommentResponseList(comments);
+    }
+
 }

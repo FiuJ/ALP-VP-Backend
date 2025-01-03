@@ -77,4 +77,23 @@ export class CommunityController {
     //     }
     // }
 
+    // Get all communities created by a specific user
+    static async getAllCommunitiesByUserId(
+        req: UserRequest,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const response = await CommunityService.getAllCommunitiesByUserId(
+                req.user!,
+                Number(req.params.user_id)
+            );
+            res.status(200).json({
+                data: response
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }

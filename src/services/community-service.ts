@@ -40,6 +40,42 @@ export class CommunityService {
         return CommunityResponseList(communities);
     }
 
+    // Get all communities by user_id
+    // static async getAllCommunitiesByUserId(user: Users, user_id: number): Promise<CommunityResponse[]> {
+    //     const communities = await prismaClient.communities.findMany({
+    //         where: {
+    //             user_id: user_id,
+    //         }
+    //     });
+    //     return CommunityResponseList(communities);
+    // }
+
+    // Get all communities by user_id
+    static async getAllCommunitiesByUserId(user: Users, user_id: number): Promise<CommunityResponse[]> {
+        if (user.user_id !== user_id) {
+            throw new ResponseError(403, "Forbidden");
+        }
+
+        // First get all user_community entries for this user
+        const userCommunityRelations = await prismaClient.users_community.findMany({
+            where: {
+                user_id: user_id
+            },
+            include: {
+                community: true  // Include the full community data
+            }
+        });
+
+        if (userCommunityRelations.length === 0) {
+            throw new ResponseError(404, "No communities found for this user");
+        }
+
+        // Extract just the community data from the relations
+        const communities = userCommunityRelations.map(relation => relation.community);
+
+        return CommunityResponseList(communities);
+    }
+
     // Get a specific community
     static async getCommunity(user: Users, community_id: number): Promise<CommunityResponse> {
         const community = await prismaClient.communities.findUnique({
