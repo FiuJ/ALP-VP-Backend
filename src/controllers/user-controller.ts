@@ -16,7 +16,6 @@ export class UserController{
         } catch (error) {
             // ini pass error ke middleware
             next(error)
-            
         }
 
     }

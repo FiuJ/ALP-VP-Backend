@@ -28,7 +28,7 @@ model Workouts {
 
 model Workouts_courses {
   workout_course_id Int @id @default(autoincrement())
-
+  day Int //untuk diread
   workout_id Int
   workout    Workouts @relation(fields: [workout_id], references: [workout_id])
 
@@ -54,7 +54,7 @@ model Users {
 
 model Courses_Users {
   course_user_id Int @id @default(autoincrement())
-
+  isDone Boolean @default(false)
   user_id Int
   user    Users @relation(fields: [user_id], references: [user_id])
 
