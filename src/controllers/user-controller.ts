@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { LoginUserRequest, RegisterUserRequest, userResponse } from "../models/user-model";
+import { LoginUserRequest, RegisterUserRequest, UserResponse } from "../models/user-model";
 import { UserService } from "../services/auth-service";
 import { UserRequest } from "../types/user-request";
 
@@ -7,7 +7,7 @@ export class UserController{
     static async register(req: Request, res: Response, next: NextFunction) {
         try {
             const request: RegisterUserRequest = req.body as RegisterUserRequest
-            const response: userResponse = await UserService.register(request)
+            const response: UserResponse = await UserService.register(request)
 
             res.status(200).json({
                 data: response
@@ -23,7 +23,7 @@ export class UserController{
     static async login(req: Request, res: Response, next: NextFunction) {
         try {
             const request: LoginUserRequest = req.body as LoginUserRequest
-            const response: userResponse = await UserService.login(request)
+            const response: UserResponse = await UserService.login(request)
 
             res.status(200).json({
                 data: response

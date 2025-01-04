@@ -7,7 +7,7 @@ export interface RegisterUserRequest{
     password: string
 }
 
-export interface  userResponse{
+export interface  UserResponse{
     token?: String
     username : String
 }
@@ -18,7 +18,7 @@ export interface LoginUserRequest{
 }
 
 // export function 
-export const toUserResponse = (user: Users): userResponse => {
+export const toUserResponse = (user: Users): UserResponse => {
     return {
         token:user.token?? "",
         username: user.username
