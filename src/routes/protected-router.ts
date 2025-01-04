@@ -17,7 +17,7 @@ export const protectedRouter = express.Router();
 protectedRouter.use(authMiddleware);
 
 
-protectedRouter.delete("/api/logout", UserController.logout)
+protectedRouter.post("/api/logout", UserController.logout)
 
 // Course-User routes
 protectedRouter.post("/api/courses-users", CoursesUsersController.createCoursesUser); // Create a new course-user relation
