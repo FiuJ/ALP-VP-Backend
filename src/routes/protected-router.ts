@@ -51,8 +51,8 @@ protectedRouter.put("/api/courses/:courseId", CourseController.updateCourse);
 // Community routes
 protectedRouter.post("/api/community", CommunityController.createCommunity);
 protectedRouter.get("/api/community", CommunityController.getAllCommunities);
-protectedRouter.get("/api/community/:communityId", CommunityController.getCommunity);
-protectedRouter.put("/api/community/:communityId", CommunityController.updateCommunity);
+protectedRouter.get("/api/community/:communityId", CommunityController.getCommunity);//ke page community-detail
+protectedRouter.put("/api/community/:communityId", CommunityController.updateCommunity);//x
 protectedRouter.get("/api/community/user/:userId", CommunityController.getAllCommunitiesByUserId);
 
 // Comment routes
