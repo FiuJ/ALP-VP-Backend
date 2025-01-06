@@ -62,8 +62,8 @@ protectedRouter.get("/api/comments/post/:postId", CommentController.getAllCommen
 
 // Post routes
 protectedRouter.post("/api/post", PostController.createPost);
-protectedRouter.get("/api/post", PostController.getAllPosts);
-protectedRouter.get("/api/post/:postId", PostController.getPost);
+protectedRouter.get("/api/post", PostController.getAllPosts);//x
+protectedRouter.get("/api/post/:postId", PostController.getPost);//x
 protectedRouter.put("/api/post/:postId", PostController.updatePost);
 protectedRouter.delete("/api/post/:postId", PostController.deletePost);
 protectedRouter.get("/api/post/user/:userId", PostController.getAllPostsByUser);
