@@ -1,6 +1,6 @@
 import { Posts } from "@prisma/client";
 import { Users } from "@prisma/client";
-import { PostCreateRequest, PostResponse, PostResponseList, toPostResponse } from "../models/post-model";
+import { PostCreateRequest, PostResponse, PostResponseList, PostUpdateRequest, toPostResponse } from "../models/post-model";
 import { PostValidation } from "../validation/post-validation";
 import { Validation } from "../validation/validation";
 import { prismaClient } from "../application/database";
@@ -25,7 +25,6 @@ export class PostService {
                 post_photo: postRequest.post_photo,
                 post_date: postRequest.post_date,
                 post_likes: postRequest.post_likes,
-                post_isLike: postRequest.post_isLike,
                 user_id: postRequest.user_id,
                 isPublic: postRequest.isPublic,
             }
@@ -55,7 +54,7 @@ export class PostService {
         return toPostResponse(post);
     }
 
-    static async updatePost(user: Users, postId: number, req: PostCreateRequest): Promise<string> {
+    static async updatePost(user: Users, postId: number, req: PostUpdateRequest): Promise<string> {
         const postUpdateRequest = Validation.validate(
             PostValidation.UPDATE,
             req
@@ -79,10 +78,6 @@ export class PostService {
                 post_name: postUpdateRequest.post_name,
                 post_description: postUpdateRequest.post_description,
                 post_photo: postUpdateRequest.post_photo,
-                post_date: postUpdateRequest.post_date,
-                post_likes: postUpdateRequest.post_likes,
-                post_isLike: postUpdateRequest.post_isLike,
-                user_id: postUpdateRequest.user_id,
                 isPublic: postUpdateRequest.isPublic,
             }
         });
@@ -130,11 +125,14 @@ export class PostService {
         return PostResponseList(posts);
     }
 
-    static async getAllPostIsPublic(user: Users): Promise<PostResponse[]> {
+    static async getAllPostIsPublic(): Promise<PostResponse[]> {
         const posts = await prismaClient.posts.findMany({
             where: {
                 isPublic: true,
             },
+            orderBy: {
+                post_date: "desc",
+            }
         });
 
         if (posts.length === 0) {

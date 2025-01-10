@@ -67,9 +67,8 @@ model Posts {
   post_name        String   @db.VarChar(200) //get course title
   post_description String   @db.Text
   post_photo       String   @db.Text //nanti ke link ke photonya
-  post_date        DateTime @default(now())
+  post_date        String   @db.Text
   post_likes       Int      @db.Integer //total likes
-  post_isLike      Boolean  @db.Boolean //true or false
   isPublic         Boolean  @db.Boolean //true or false
 
   user_id Int // user id disini
@@ -83,7 +82,7 @@ model Comments {
   //yes connect user sm post
   comment_id   Int      @id @default(autoincrement())
   comment      String   @db.Text //get course title
-  comment_date DateTime @default(now())
+  comment_date String   @db.Text
 
   user_id Int
   user    Users @relation(fields: [user_id], references: [user_id])

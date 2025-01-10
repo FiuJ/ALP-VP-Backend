@@ -2,7 +2,7 @@ import { Comments } from "@prisma/client";
 
 export interface CommentCreateRequest {
     comment: string;
-    comment_date: Date;
+    comment_date: string;
     user_id: number;
     post_id: number;
 }
@@ -10,7 +10,7 @@ export interface CommentCreateRequest {
 export interface CommentResponse {
     comment_id: number;
     comment: string;
-    comment_date: Date;
+    comment_date: string;
     user_id: number;
     post_id: number;
 }

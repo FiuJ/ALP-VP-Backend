@@ -57,17 +57,17 @@ protectedRouter.get("/api/community/user/:userId", CommunityController.getAllCom
 
 // Comment routes
 protectedRouter.post("/api/comments", CommentController.createComment);
-protectedRouter.get("/api/comments", CommentController.getAllComments);
+protectedRouter.get("/api/comments", CommentController.getAllComments);//x
 protectedRouter.get("/api/comments/post/:postId", CommentController.getAllCommentsByPostId);
 
 // Post routes
-protectedRouter.post("/api/post", PostController.createPost);
+protectedRouter.post("/api/post", PostController.createPost);//rill
 protectedRouter.get("/api/post", PostController.getAllPosts);//x
 protectedRouter.get("/api/post/:postId", PostController.getPost);//x
-protectedRouter.put("/api/post/:postId", PostController.updatePost);
-protectedRouter.delete("/api/post/:postId", PostController.deletePost);
-protectedRouter.get("/api/post/user/:userId", PostController.getAllPostsByUser);
-protectedRouter.get("/api/post/public", PostController.getAllPostIsPublic);
+protectedRouter.put("/api/post/:postId", PostController.updatePost);//rill
+protectedRouter.delete("/api/post/:postId", PostController.deletePost);//rill
+protectedRouter.get("/api/post/user/:userId", PostController.getAllPostsByUser);//rill
+protectedRouter.get("/api/public", PostController.getAllPostIsPublic);//rill
 
 // User-Community routes
 protectedRouter.post("/api/user-community", UserCommunityController.createUserCommunity);
