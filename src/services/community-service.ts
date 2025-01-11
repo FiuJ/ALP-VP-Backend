@@ -36,7 +36,10 @@ export class CommunityService {
     // Get all communities //////////////////////////////////////////////////////////////////////////////
     // PERLUKAH parameter user: Users?
     static async getAllCommunities(user: Users): Promise<CommunityResponse[]> {
-        const communities = await prismaClient.communities.findMany();    
+        const communities = await prismaClient.communities.findMany();   
+        if (communities.length === 0) {
+            throw new ResponseError(400, "No posts found for user");
+        } 
         return CommunityResponseList(communities);
     }
 

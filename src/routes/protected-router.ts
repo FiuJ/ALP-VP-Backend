@@ -49,11 +49,11 @@ protectedRouter.get("/api/courses/:courseId", CourseController.getCourse);
 protectedRouter.put("/api/courses/:courseId", CourseController.updateCourse);
 
 // Community routes
-protectedRouter.post("/api/community", CommunityController.createCommunity);
-protectedRouter.get("/api/community", CommunityController.getAllCommunities);
-protectedRouter.get("/api/community/:communityId", CommunityController.getCommunity);//ke page community-detail
+protectedRouter.post("/api/community", CommunityController.createCommunity);//x
+protectedRouter.get("/api/community", CommunityController.getAllCommunities);//rill
+protectedRouter.get("/api/community/:communityId", CommunityController.getCommunity);//x
 protectedRouter.put("/api/community/:communityId", CommunityController.updateCommunity);//x
-protectedRouter.get("/api/community/user/:userId", CommunityController.getAllCommunitiesByUserId);
+protectedRouter.get("/api/community/user/:userId", CommunityController.getAllCommunitiesByUserId);//rill
 
 // Comment routes
 protectedRouter.post("/api/comments", CommentController.createComment);
@@ -70,7 +70,7 @@ protectedRouter.get("/api/post/user/:userId", PostController.getAllPostsByUser);
 protectedRouter.get("/api/public", PostController.getAllPostIsPublic);//rill
 
 // User-Community routes
-protectedRouter.post("/api/user-community", UserCommunityController.createUserCommunity);
+protectedRouter.post("/api/user-community", UserCommunityController.createUserCommunity);//rill just put the community_id
 protectedRouter.get("/api/user-community", UserCommunityController.getAllUserCommunities);
 protectedRouter.get("/api/user-community/:userCommunityId", UserCommunityController.getUserCommunityById);
 protectedRouter.delete("/api/user-community/:userCommunityId", UserCommunityController.deleteUserCommunityById);
