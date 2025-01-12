@@ -57,7 +57,7 @@ protectedRouter.get("/api/community/user/:userId", CommunityController.getAllCom
 
 // Comment routes
 protectedRouter.post("/api/comments", CommentController.createComment);
-protectedRouter.get("/api/comments", CommentController.getAllComments);//x
+// protectedRouter.get("/api/comments", CommentController.getAllComments);//x
 protectedRouter.get("/api/comments/post/:postId", CommentController.getAllCommentsByPostId);
 
 // Post routes
