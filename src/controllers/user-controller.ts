@@ -20,6 +20,7 @@ export class UserController{
 
     }
 
+
     static async login(req: Request, res: Response, next: NextFunction) {
         try {
             const request: LoginUserRequest = req.body as LoginUserRequest
@@ -49,5 +50,36 @@ export class UserController{
             next(error)
         }
 
+    }
+    
+    static async getUserIdFromToken(req: Request, res: Response, next: NextFunction) {
+        try {
+            const token = req.headers.authorization;   // Extract token from header
+            if (!token) {
+                throw new Error("Token not provided");
+            }
+
+            const userId = await UserService.getUserIdFromToken(token);
+
+            res.status(200).json({
+                data: { userId },
+            });
+        } catch (error) {
+            next(error); // Pass error to error-handling middleware
+        }
+    }
+
+    static async emergencyLogout(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { user_id } = req.body;  // Assuming user_id is provided in the request body
+            if (!user_id) {
+                throw new Error("User ID is required");
+            }
+    
+            const response = await UserService.emergencyLogout(Number(user_id));
+            res.status(200).json({ message: response });
+        } catch (error) {
+            next(error);
+        }
     }
 }

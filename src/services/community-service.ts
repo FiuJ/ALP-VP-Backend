@@ -11,7 +11,6 @@ export class CommunityService {
 
     // Create a new community
     static async createCommunity(
-        user: Users, 
         req: CommunityCreateRequest, 
     ): Promise<string> {
 

@@ -18,6 +18,7 @@ protectedRouter.use(authMiddleware);
 
 
 protectedRouter.post("/api/logout", UserController.logout)
+protectedRouter.get("/api/user", UserController.getUserIdFromToken)
 
 // Course-User routes
 protectedRouter.post("/api/courses-users", CoursesUsersController.createCoursesUser); // Create a new course-user relation
@@ -29,7 +30,6 @@ protectedRouter.delete("/api/courses-users/:courseUserId", CoursesUsersControlle
 
 
 // Workout-Courses routes
-protectedRouter.post("/api/workout-courses", WorkoutCoursesController.createWorkoutCourse); // Create a new workout-course relation
 protectedRouter.get("/api/workout-courses", WorkoutCoursesController.getAllWorkoutCourses); // Get all workout-course relations
 protectedRouter.get("/api/workout-courses/:workoutCourseId", WorkoutCoursesController.getWorkoutCourse); // Get a specific workout-course by ID
 protectedRouter.get("/api/workout-courses/course/:courseId", WorkoutCoursesController.getAllWorkoutCourseByCourseId); // Get workout-course relations by course ID
@@ -37,19 +37,17 @@ protectedRouter.put("/api/workout-courses/:workoutCourseId", WorkoutCoursesContr
 protectedRouter.delete("/api/workout-courses/:workoutCourseId", WorkoutCoursesController.deleteWorkoutCourse); // Delete a workout-course relation
 
 // Workout routes
-protectedRouter.post("/api/workouts", WorkoutController.createWorkout);
 protectedRouter.get("/api/workouts", WorkoutController.getAllWorkouts);
 protectedRouter.get("/api/workouts/:workoutId", WorkoutController.getWorkout);
 protectedRouter.put("/api/workouts/:workoutId", WorkoutController.updateWorkout);
 
 // Course routes
-protectedRouter.post("/api/courses", CourseController.createCourse);
 protectedRouter.get("/api/courses", CourseController.getAllCourses);
 protectedRouter.get("/api/courses/:courseId", CourseController.getCourse);
 protectedRouter.put("/api/courses/:courseId", CourseController.updateCourse);
 
 // Community routes
-protectedRouter.post("/api/community", CommunityController.createCommunity);
+
 protectedRouter.get("/api/community", CommunityController.getAllCommunities);
 protectedRouter.get("/api/community/:communityId", CommunityController.getCommunity);
 protectedRouter.put("/api/community/:communityId", CommunityController.updateCommunity);

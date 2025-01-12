@@ -9,7 +9,7 @@ export class WorkoutController {
     static async createWorkout(req: UserRequest, res: Response, next: NextFunction) {
        try {
                const request: WorkoutCreateRequest = req.body as WorkoutCreateRequest;
-               const response = await WorkoutService.createWorkout(req.user!, request);
+               const response = await WorkoutService.createWorkout( request);
                res.status(201).json({data: response,})
              }  catch (error) {
                next(error);
@@ -37,7 +37,7 @@ export class WorkoutController {
         try {
                     const response = await WorkoutService.getWorkout(
                         req.user!
-                        ,Number(req.params.course_id)
+                        ,Number(req.params.workoutId)
                     );
                     res.status(200).json({
                         data:response,

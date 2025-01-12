@@ -10,7 +10,7 @@ export class WorkoutCoursesController {
     static async createWorkoutCourse(req: UserRequest, res: Response, next: NextFunction) {
         try {
             const request: WorkoutCoursesCreateRequest = req.body as WorkoutCoursesCreateRequest;
-            const response = await WorkoutCoursesService.createWorkoutCourse(req.user!, request);
+            const response = await WorkoutCoursesService.createWorkoutCourse( request);
             res.status(201).json({ data: response });
         } catch (error) {
             next(error);
