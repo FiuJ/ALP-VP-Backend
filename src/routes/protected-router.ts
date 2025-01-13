@@ -48,27 +48,28 @@ protectedRouter.put("/api/courses/:courseId", CourseController.updateCourse);
 
 // Community routes
 
-protectedRouter.get("/api/community", CommunityController.getAllCommunities);
-protectedRouter.get("/api/community/:communityId", CommunityController.getCommunity);
-protectedRouter.put("/api/community/:communityId", CommunityController.updateCommunity);
-protectedRouter.get("/api/community/user/:userId", CommunityController.getAllCommunitiesByUserId);
+protectedRouter.post("/api/community", CommunityController.createCommunity);//x
+protectedRouter.get("/api/community", CommunityController.getAllCommunities);//rill
+protectedRouter.get("/api/community/:communityId", CommunityController.getCommunity);//x
+protectedRouter.put("/api/community/:communityId", CommunityController.updateCommunity);//x
+protectedRouter.get("/api/community/user/:userId", CommunityController.getAllCommunitiesByUserId);//rill
 
 // Comment routes
 protectedRouter.post("/api/comments", CommentController.createComment);
-protectedRouter.get("/api/comments", CommentController.getAllComments);
+protectedRouter.get("/api/comments", CommentController.getAllComments);//x
 protectedRouter.get("/api/comments/post/:postId", CommentController.getAllCommentsByPostId);
 
 // Post routes
-protectedRouter.post("/api/post", PostController.createPost);
-protectedRouter.get("/api/post", PostController.getAllPosts);
-protectedRouter.get("/api/post/:postId", PostController.getPost);
-protectedRouter.put("/api/post/:postId", PostController.updatePost);
-protectedRouter.delete("/api/post/:postId", PostController.deletePost);
-protectedRouter.get("/api/post/user/:userId", PostController.getAllPostsByUser);
-protectedRouter.get("/api/post/public", PostController.getAllPostIsPublic);
+protectedRouter.post("/api/post", PostController.createPost);//rill
+protectedRouter.get("/api/post", PostController.getAllPosts);//x
+protectedRouter.get("/api/post/:postId", PostController.getPost);//x
+protectedRouter.put("/api/post/:postId", PostController.updatePost);//rill
+protectedRouter.delete("/api/post/:postId", PostController.deletePost);//rill
+protectedRouter.get("/api/post/user/:userId", PostController.getAllPostsByUser);//rill
+protectedRouter.get("/api/public", PostController.getAllPostIsPublic);//rill
 
 // User-Community routes
-protectedRouter.post("/api/user-community", UserCommunityController.createUserCommunity);
+protectedRouter.post("/api/user-community", UserCommunityController.createUserCommunity);//rill just put the community_id
 protectedRouter.get("/api/user-community", UserCommunityController.getAllUserCommunities);
 protectedRouter.get("/api/user-community/:userCommunityId", UserCommunityController.getUserCommunityById);
 protectedRouter.delete("/api/user-community/:userCommunityId", UserCommunityController.deleteUserCommunityById);

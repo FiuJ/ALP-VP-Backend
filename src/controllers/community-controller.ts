@@ -86,7 +86,8 @@ export class CommunityController {
         try {
             const response = await CommunityService.getAllCommunitiesByUserId(
                 req.user!,
-                Number(req.params.user_id)
+                Number(req.params.userId)
+                // Number(req.params.user_id)
             );
             res.status(200).json({
                 data: response

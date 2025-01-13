@@ -8,6 +8,7 @@ export interface RegisterUserRequest{
 }
 
 export interface  UserResponse{
+    id: number
     token?: String
     username : String
     user_id: number
@@ -21,6 +22,7 @@ export interface LoginUserRequest{
 // export function 
 export const toUserResponse = (user: Users): UserResponse => {
     return {
+        id: user.user_id,
         token:user.token?? "",
         username: user.username,
         user_id: user.user_id

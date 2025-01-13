@@ -17,13 +17,13 @@ export class CommentService {
         const commentRequest = Validation.validate(
             CommentValidation.CREATE,
             req
-        );
+        );  
 
         await prismaClient.comments.create({
             data: {
                 comment: commentRequest.comment,
                 comment_date: commentRequest.comment_date,
-                user_id: commentRequest.user_id,
+                user_id: user.user_id,
                 post_id: commentRequest.post_id
             }
         });

@@ -1,6 +1,6 @@
 import { NextFunction, Response } from "express";
 import { UserRequest } from "../types/user-request";
-import { PostCreateRequest, PostResponse, PostResponseList } from "../models/post-model";
+import { PostCreateRequest, PostResponse, PostResponseList, PostUpdateRequest } from "../models/post-model";
 import { PostService } from "../services/post-service";
 import { prismaClient } from "../application/database";
 import { ResponseError } from "../error/response-error";
@@ -47,7 +47,7 @@ export class PostController {
     static async updatePost(req: UserRequest, res: Response, next: NextFunction) {
         try {
             const postId = parseInt(req.params.postId);
-            const request: PostCreateRequest = req.body as PostCreateRequest;
+            const request: PostUpdateRequest = req.body as PostUpdateRequest;
             const response = await PostService.updatePost(req.user!, postId, request);
             res.status(200).json({
                 data: response
@@ -86,7 +86,7 @@ export class PostController {
     //Get all public posts
     static async getAllPostIsPublic(req: UserRequest, res: Response, next: NextFunction) {
         try {
-            const response = await PostService.getAllPostIsPublic(req.user!);
+            const response = await PostService.getAllPostIsPublic();
             res.status(200).json({
                 data: response
             });

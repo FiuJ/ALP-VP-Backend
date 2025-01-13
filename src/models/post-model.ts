@@ -5,9 +5,8 @@ export interface PostCreateRequest {
     post_name: string;
     post_description: string;
     post_photo: string;
-    post_date: Date;
+    post_date: string;
     post_likes: number;
-    post_isLike: boolean;
     user_id: number;
     isPublic: boolean;
 }
@@ -17,10 +16,16 @@ export interface PostResponse {
     post_name: string;
     post_description: string;
     post_photo: string;
-    post_date: Date;
+    post_date: string;
     post_likes: number;
-    post_isLike: boolean;
     user_id: number;
+    isPublic: boolean;
+}
+
+export interface PostUpdateRequest {
+    post_name: string;
+    post_description: string;
+    post_photo: string;
     isPublic: boolean;
 }
 
@@ -33,7 +38,6 @@ export function PostResponseList (posts: Posts[]): PostResponse[] {
             post_photo: data.post_photo,
             post_date: data.post_date,
             post_likes: data.post_likes,
-            post_isLike: data.post_isLike,
             user_id: data.user_id,
             isPublic: data.isPublic,
         };
@@ -49,7 +53,6 @@ export function toPostResponse(post: Posts): PostResponse {
         post_photo: post.post_photo,
         post_date: post.post_date,
         post_likes: post.post_likes,
-        post_isLike: post.post_isLike,
         user_id: post.user_id,
         isPublic: post.isPublic,
     };
