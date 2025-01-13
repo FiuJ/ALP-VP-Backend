@@ -31,18 +31,26 @@ export class CommentService {
         return "Comment created successfully";
     }
 
-    static async getAllComments(user: Users): Promise<CommentResponse[]> {
-        const comments = await prismaClient.comments.findMany();
-        return CommentResponseList(comments);
-    }
+    // static async getAllComments(user: Users): Promise<CommentResponse[]> {
+    //     const comments = await prismaClient.comments.findMany();
+    //     return CommentResponseList(comments);
+    // }
 
     static async getAllCommentsByPostId(user: Users, post_id: number): Promise<CommentResponse[]> {
         const comments = await prismaClient.comments.findMany({
             where: {
-                post_id: post_id
-            }
+                post_id,
+            },
+            include: {
+                user: { // Fetch the user relation
+                    select: {
+                        username: true, // Only fetch the username
+                    },
+                },
+            },
         });
         return CommentResponseList(comments);
     }
+    
 
 }
