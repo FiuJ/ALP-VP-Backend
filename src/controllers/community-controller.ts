@@ -9,7 +9,7 @@ export class CommunityController {
     static async createCommunity(req: UserRequest, res: Response, next: NextFunction) {
         try {
             const request: CommunityCreateRequest = req.body as CommunityCreateRequest;
-            const response = await CommunityService.createCommunity(req.user!, request);
+            const response = await CommunityService.createCommunity( request);
             res.status(201).json({ data: response });
         } catch (error) {
             next(error);

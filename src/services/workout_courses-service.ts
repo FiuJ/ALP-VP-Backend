@@ -9,7 +9,6 @@ export class WorkoutCoursesService {
 
     // Create a new workout-course relation
     static async createWorkoutCourse(
-        user: Users,
         req: WorkoutCoursesCreateRequest
     ): Promise<string> {
         const workoutCourseRequest = Validation.validate(

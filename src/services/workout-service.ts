@@ -11,14 +11,14 @@ export class WorkoutService {
 
     // Create a new workout
     static async createWorkout(
-        user: Users,
-        req: WorkoutCreateRequest): Promise<string> {
+        req: WorkoutCreateRequest
+    ): Promise<string> {
         // Validate the request data using the WorkoutValidation
         const workoutRequest = Validation.validate(
             WorkoutValidation.CREATE,
             req
         );
-
+    
         // Add workout data to the database
         await prismaClient.workouts.create({
             data: {
@@ -29,9 +29,10 @@ export class WorkoutService {
                 workout_duration: workoutRequest.workout_duration
             }
         });
-
+    
         return "Workout created successfully";
     }
+    
 
     // Get all workouts
     static async getAllWorkouts(user: Users): Promise<WorkoutResponse[]> {

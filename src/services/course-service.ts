@@ -9,7 +9,6 @@ export class CourseService {
 
     // Create a new course
     static async createCourse(
-        user: Users, // The user creating the course
         req: CourseCreateRequest // The course creation request data
     ): Promise<string> {
         const courseRequest = Validation.validate(

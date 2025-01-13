@@ -5,26 +5,25 @@ import { CourseService } from "../services/course-service";
 
 export class CourseController {
 
-    static async createCourse(req:UserRequest, res:Response, next: NextFunction)
-    {
-      try {
-        const request: CourseCreateRequest = req.body as CourseCreateRequest;
-        const response = await CourseService.createCourse(req.user!, request);
-        res.status(201).json({data: response,})
-      }  catch (error) {
-        next(error);
-      }
+    static async createCourse(req: UserRequest, res: Response, next: NextFunction) {
+        try {
+            const request: CourseCreateRequest = req.body as CourseCreateRequest;
+            const response = await CourseService.createCourse(request);
+            res.status(201).json({ data: response, })
+        } catch (error) {
+            next(error);
+        }
     }
 
     static async getAllCourses(
-        req:UserRequest,
-        res:Response,
+        req: UserRequest,
+        res: Response,
         next: NextFunction
-    ){
+    ) {
         try {
             const response = await CourseService.getAllCourses(req.user!);
             res.status(200).json({
-                data:response,
+                data: response,
             })
         }
         catch (error) {
@@ -33,17 +32,18 @@ export class CourseController {
     }
 
     static async getCourse(
-        req:UserRequest,
-        res:Response,
+        req: UserRequest,
+        res: Response,
         next: NextFunction
-    ){
+    ) {
         try {
+            console.log("Received courseId:", req.params.course_id);
             const response = await CourseService.getCourse(
                 req.user!
-                ,Number(req.params.course_id)
+                , Number(req.params.courseId)
             );
             res.status(200).json({
-                data:response,
+                data: response,
             })
         }
         catch (error) {
@@ -52,19 +52,19 @@ export class CourseController {
     }
 
     static async updateCourse(
-        req:UserRequest,
-        res:Response,
+        req: UserRequest,
+        res: Response,
         next: NextFunction
-    ){
-      try {
-        const request: CourseCreateRequest = req.body as CourseCreateRequest;
-        const response = await CourseService.updateCourse(req.user!, Number(req.params.course_id),request);
-        res.status(201).json({
-            data: response,
-        })
-      }  catch (error) {
-        next(error);
-      }
+    ) {
+        try {
+            const request: CourseCreateRequest = req.body as CourseCreateRequest;
+            const response = await CourseService.updateCourse(req.user!, Number(req.params.course_id), request);
+            res.status(201).json({
+                data: response,
+            })
+        } catch (error) {
+            next(error);
+        }
     }
 
 }

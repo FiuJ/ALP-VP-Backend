@@ -8,6 +8,22 @@ import bcrypt from "bcrypt"
 import { v4 as uuid } from "uuid"
 
 export class UserService {
+
+    static async getUserIdFromToken(token: string): Promise<number> {
+        const user = await prismaClient.users.findFirst({
+            where: {
+                token: token,  // Directly searching for the token in the database
+            },
+        });
+
+        if (!user) {
+            throw new ResponseError(401, "Invalid token");
+        }
+        return user.user_id;  // Return the userId if token is valid
+    }
+
+
+
     static async register(
         req: RegisterUserRequest
     ): Promise<UserResponse> {
@@ -87,6 +103,24 @@ export class UserService {
             },
         })
         return "Logged out successfully"
+    }
+
+    //EmergencyLogoout
+    static async emergencyLogout(userId: number): Promise<string> {
+        const user = await prismaClient.users.findUnique({
+            where: { user_id: userId }
+        });
+    
+        if (!user) {
+            throw new ResponseError(404, "User not found");
+        }
+    
+        await prismaClient.users.update({
+            where: { user_id: userId },
+            data: { token: null }
+        });
+    
+        return "User forcefully logged out";
     }
 }
 
