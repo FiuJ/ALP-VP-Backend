@@ -6,3 +6,4 @@ bukalah PGAdmin dan buat database bernama alpvp kemudian lakukan "npx prisma mig
 Gantilah username sesuai username pada PGAdmin dan juga password. 
 
 Lakukan seeding manual dengan menggunakan thunderclient atau postman dengan menyesuaikan route pada public-router dan juga protected-router.
+Jalankan dengan "npm run start"
