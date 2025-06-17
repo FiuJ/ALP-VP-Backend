@@ -45,6 +45,8 @@ export function PostResponseList (posts: Posts[]): PostResponse[] {
     return result;
 }
 
+//iki hrs e iso
+
 export function toPostResponse(post: Posts): PostResponse {
     return {
         post_id: post.post_id,
